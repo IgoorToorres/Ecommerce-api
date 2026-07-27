@@ -1,3 +1,5 @@
+using Ecommerce.Exception.Exceptions;
+
 namespace Ecommerce.Domain.Entities;
 
 public class Product
@@ -12,7 +14,7 @@ public class Product
     public DateTime UpdatedAt {get; private set;}
 
 
-    // TODO: formatar exceptions corretamente para mensagens padroes
+    // TODO: formatar DomainExceptions corretamente para mensagens padroes
 
 
     public Product(string name, string description, decimal price, int stockQuantity)
@@ -52,7 +54,7 @@ public class Product
     public void DecreaseStock(int quantity)
     {
         ValidateQuantityGreaterThanZero(quantity);
-        if(StockQuantity < quantity) throw new Exception("Estoque insuficiente.");
+        if(StockQuantity < quantity) throw new DomainException("Estoque insuficiente.");
 
         StockQuantity -= quantity;
         UpdateAt();
@@ -60,7 +62,7 @@ public class Product
 
     public void Activate()
     {
-        if(IsActive) throw new Exception("Produto ja esta ativo.");
+        if(IsActive) throw new DomainException("Produto ja esta ativo.");
         ValidateName(Name);
         ValidatePrice(Price);
 
@@ -71,7 +73,7 @@ public class Product
 
     public void Deactivate()
     {
-        if(!IsActive) throw new Exception("Produto ja esta inativo.");
+        if(!IsActive) throw new DomainException("Produto ja esta inativo.");
 
         IsActive = false;
         UpdateAt();
@@ -100,22 +102,22 @@ public class Product
 
     private static void ValidateName(string name)
     {
-        if(string.IsNullOrWhiteSpace(name)) throw new Exception("O nome do produto é obrigatório.");
+        if(string.IsNullOrWhiteSpace(name)) throw new DomainException("O nome do produto é obrigatório.");
     }
 
     private static void ValidatePrice(decimal price)
     {
-        if(price <= 0) throw new Exception("O preço deve ser maior que zero.");
+        if(price <= 0) throw new DomainException("O preço deve ser maior que zero.");
     }
 
     private static void ValidateStockQuantity(int stockQuantity)
     {
-        if(stockQuantity < 0) throw new Exception("O estoque não pode ser negativo.");
+        if(stockQuantity < 0) throw new DomainException("O estoque não pode ser negativo.");
     }
 
     private static void ValidateQuantityGreaterThanZero(int quantity)
     {
-         if (quantity <= 0) throw new Exception("A quantidade deve ser maior que zero.");
+         if (quantity <= 0) throw new DomainException("A quantidade deve ser maior que zero.");
     }
 
 }

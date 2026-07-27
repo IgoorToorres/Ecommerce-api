@@ -1,4 +1,5 @@
 using Ecommerce.Domain.Entities;
+using Ecommerce.Exception.Exceptions;
 
 namespace Ecommerce.UnitTests.Domain.Entities;
 
@@ -37,7 +38,7 @@ public class ProductTests
     [Fact]
     public void Should_Throw_Exception_When_Name_Is_Empty(){
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             new Product(
                 name: "",
                 description: "Teclado mecanico com switches brown",
@@ -51,7 +52,7 @@ public class ProductTests
     [Fact]
     public void Should_Throw_Exception_When_Price_Is_Zero()
     {
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             new Product(
                 name: "Teclado mecanico",
                 description: "Teclado mecanico com switches brown",
@@ -65,7 +66,7 @@ public class ProductTests
     [Fact]
     public void Should_Throw_Exception_When_Price_Is_Negative()
     {
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             new Product(
                 name: "Teclado mecanico",
                 description: "Teclado mecanico com switches brown",
@@ -80,7 +81,7 @@ public class ProductTests
     [Fact]
     public void Should_Throw_Exception_When_StockQuantity_Is_Negative()
     {
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             new Product(
                 name: "Teclado mecanico",
                 description: "Teclado mecanico com switches brown",
@@ -117,7 +118,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.ChangePrice(0)
         );
 
@@ -134,7 +135,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.ChangePrice(-50)
         );
 
@@ -166,7 +167,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.IncreaseStock(0));
 
         Assert.Equal("A quantidade deve ser maior que zero.", exception.Message);
@@ -182,7 +183,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.IncreaseStock(-5)
         );
 
@@ -214,7 +215,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.DecreaseStock(0)
         );
 
@@ -231,7 +232,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.DecreaseStock(-5)
         );
 
@@ -248,7 +249,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.DecreaseStock(15)
         );
 
@@ -359,7 +360,7 @@ public class ProductTests
 
         product.Deactivate();
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.Deactivate()
         );
 
@@ -393,7 +394,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.Activate()
         );
 
@@ -429,7 +430,7 @@ public class ProductTests
             stockQuantity: 10
         );
 
-        var exception = Assert.Throws<Exception>(() =>
+        var exception = Assert.Throws<DomainException>(() =>
             product.UpdateDetails(
                 name: "",
                 description: "Mouse ergonomico com bluetooth"
