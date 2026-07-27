@@ -52,7 +52,7 @@ public class Product
     public void DecreaseStock(int quantity)
     {
         ValidateQuantityGreaterThanZero(quantity);
-        if(StockQuantity < quantity) throw new Exception("nao tem o valor suficiente em estoque, estoque nao pode ser negativo");
+        if(StockQuantity < quantity) throw new Exception("Estoque insuficiente.");
 
         StockQuantity -= quantity;
         UpdateAt();
@@ -110,7 +110,7 @@ public class Product
 
     private static void ValidateStockQuantity(int stockQuantity)
     {
-        if(stockQuantity < 0) throw new Exception("Estoque insuficiente.");
+        if(stockQuantity < 0) throw new Exception("O estoque não pode ser negativo.");
     }
 
     private static void ValidateQuantityGreaterThanZero(int quantity)
