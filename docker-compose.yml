@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ecommerce_api_postgres
+    environment:
+      POSTGRES_DB: ecommerce_api
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ecommerce_api_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  ecommerce_api_postgres_data:
