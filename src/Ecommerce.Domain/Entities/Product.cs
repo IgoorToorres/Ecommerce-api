@@ -16,6 +16,7 @@ public class Product
 
     // TODO: formatar DomainExceptions corretamente para mensagens padroes
 
+    private Product(){}
 
     public Product(string name, string description, decimal price, int stockQuantity)
     {
@@ -32,7 +33,6 @@ public class Product
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
-
 
     public void ChangePrice(decimal price)
     {
