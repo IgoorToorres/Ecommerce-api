@@ -1,4 +1,5 @@
 using System.Reflection;
+using Ecommerce.Api.Filters;
 using Ecommerce.Application.Extensions;
 using Ecommerce.Infrastructure.Extensions;
 using Microsoft.OpenApi;
@@ -10,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
